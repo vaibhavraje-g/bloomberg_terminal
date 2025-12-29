@@ -1,0 +1,680 @@
+// Bloomberg Terminal Alternative - Global Styles
+// Dark theme inspired by Bloomberg Terminal
+
+// ============================================
+// VARIABLES
+// ============================================
+
+// Colors - Bloomberg inspired palette
+$bg-primary: #0f0f0f;
+$bg-secondary: #1a1a1f;
+$bg-tertiary: #252530;
+$bg-card: #1e1e26;
+$bg-hover: #2a2a35;
+
+// Accent colors
+$accent-primary: #ff6600; // Bloomberg Orange
+$accent-secondary: #00d4ff;
+$accent-success: #00c853;
+$accent-danger: #ff1744;
+$accent-warning: #ffab00;
+
+// Text colors
+$text-primary: #ffffff;
+$text-secondary: #a0a0a0;
+$text-muted: #6b6b6b;
+
+// Status colors
+$positive: #00c853;
+$negative: #ff1744;
+$neutral: #ffab00;
+
+// Border
+$border-color: #2d2d3a;
+$border-light: #3a3a4a;
+
+// Fonts
+$font-mono: 'JetBrains Mono', 'Fira Code', 'Consolas', monospace;
+$font-sans: 'Inter', 'Segoe UI', system-ui, sans-serif;
+
+// Spacing
+$spacing-xs: 4px;
+$spacing-sm: 8px;
+$spacing-md: 16px;
+$spacing-lg: 24px;
+$spacing-xl: 32px;
+
+// Border radius
+$radius-sm: 4px;
+$radius-md: 8px;
+$radius-lg: 12px;
+
+// ============================================
+// CSS RESET & BASE
+// ============================================
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html, body {
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+}
+
+body {
+  font-family: $font-sans;
+  font-size: 14px;
+  line-height: 1.5;
+  background-color: $bg-primary;
+  color: $text-primary;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+// Import fonts
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap');
+
+// ============================================
+// TYPOGRAPHY
+// ============================================
+
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 600;
+  line-height: 1.2;
+  color: $text-primary;
+}
+
+h1 { font-size: 28px; }
+h2 { font-size: 24px; }
+h3 { font-size: 20px; }
+h4 { font-size: 16px; }
+h5 { font-size: 14px; }
+h6 { font-size: 12px; }
+
+.mono {
+  font-family: $font-mono;
+}
+
+// ============================================
+// UTILITY CLASSES
+// ============================================
+
+.text-positive { color: $positive !important; }
+.text-negative { color: $negative !important; }
+.text-neutral { color: $neutral !important; }
+.text-accent { color: $accent-primary !important; }
+.text-muted { color: $text-muted !important; }
+.text-secondary { color: $text-secondary !important; }
+
+.bg-card { background-color: $bg-card; }
+.bg-secondary { background-color: $bg-secondary; }
+
+// Value indicators
+.value-up {
+  color: $positive;
+  &::before { content: '▲ '; font-size: 10px; }
+}
+
+.value-down {
+  color: $negative;
+  &::before { content: '▼ '; font-size: 10px; }
+}
+
+// ============================================
+// SCROLLBAR
+// ============================================
+
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: $bg-secondary;
+}
+
+::-webkit-scrollbar-thumb {
+  background: $border-light;
+  border-radius: 4px;
+  
+  &:hover {
+    background: $text-muted;
+  }
+}
+
+// ============================================
+// COMPONENTS - Cards
+// ============================================
+
+.card {
+  background: $bg-card;
+  border: 1px solid $border-color;
+  border-radius: $radius-md;
+  overflow: hidden;
+  
+  &-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: $spacing-sm $spacing-md;
+    background: $bg-secondary;
+    border-bottom: 1px solid $border-color;
+    
+    h4, h5 {
+      margin: 0;
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: $text-secondary;
+    }
+  }
+  
+  &-body {
+    padding: $spacing-md;
+  }
+}
+
+// ============================================
+// COMPONENTS - Buttons
+// ============================================
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: $spacing-xs;
+  padding: $spacing-sm $spacing-md;
+  font-size: 13px;
+  font-weight: 500;
+  border: none;
+  border-radius: $radius-sm;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-family: inherit;
+  
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+  
+  &-primary {
+    background: $accent-primary;
+    color: white;
+    
+    &:hover:not(:disabled) {
+      background: lighten($accent-primary, 10%);
+    }
+  }
+  
+  &-secondary {
+    background: $bg-tertiary;
+    color: $text-primary;
+    border: 1px solid $border-color;
+    
+    &:hover:not(:disabled) {
+      background: $bg-hover;
+      border-color: $border-light;
+    }
+  }
+  
+  &-ghost {
+    background: transparent;
+    color: $text-secondary;
+    
+    &:hover:not(:disabled) {
+      background: $bg-hover;
+      color: $text-primary;
+    }
+  }
+  
+  &-sm {
+    padding: $spacing-xs $spacing-sm;
+    font-size: 12px;
+  }
+  
+  &-icon {
+    padding: $spacing-sm;
+    aspect-ratio: 1;
+  }
+}
+
+// ============================================
+// COMPONENTS - Inputs
+// ============================================
+
+.input {
+  width: 100%;
+  padding: $spacing-sm $spacing-md;
+  font-size: 14px;
+  font-family: inherit;
+  background: $bg-secondary;
+  border: 1px solid $border-color;
+  border-radius: $radius-sm;
+  color: $text-primary;
+  transition: all 0.2s ease;
+  
+  &:focus {
+    outline: none;
+    border-color: $accent-primary;
+    box-shadow: 0 0 0 2px rgba($accent-primary, 0.2);
+  }
+  
+  &::placeholder {
+    color: $text-muted;
+  }
+}
+
+.input-group {
+  display: flex;
+  gap: $spacing-sm;
+  
+  .input {
+    flex: 1;
+  }
+}
+
+// ============================================
+// COMPONENTS - Tables
+// ============================================
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+  
+  th, td {
+    padding: $spacing-sm $spacing-md;
+    text-align: left;
+    border-bottom: 1px solid $border-color;
+  }
+  
+  th {
+    font-weight: 500;
+    color: $text-secondary;
+    text-transform: uppercase;
+    font-size: 11px;
+    letter-spacing: 0.5px;
+    background: $bg-secondary;
+  }
+  
+  td {
+    font-family: $font-mono;
+    font-size: 13px;
+  }
+  
+  tbody tr {
+    transition: background 0.15s ease;
+    
+    &:hover {
+      background: $bg-hover;
+    }
+  }
+  
+  .text-right {
+    text-align: right;
+  }
+}
+
+// ============================================
+// COMPONENTS - Tags/Badges
+// ============================================
+
+.tag {
+  display: inline-flex;
+  align-items: center;
+  padding: 2px 8px;
+  font-size: 11px;
+  font-weight: 500;
+  border-radius: 4px;
+  background: $bg-tertiary;
+  color: $text-secondary;
+  
+  &-success {
+    background: rgba($positive, 0.15);
+    color: $positive;
+  }
+  
+  &-danger {
+    background: rgba($negative, 0.15);
+    color: $negative;
+  }
+  
+  &-warning {
+    background: rgba($neutral, 0.15);
+    color: $neutral;
+  }
+  
+  &-accent {
+    background: rgba($accent-primary, 0.15);
+    color: $accent-primary;
+  }
+}
+
+// ============================================
+// COMPONENTS - Loading
+// ============================================
+
+.spinner {
+  width: 24px;
+  height: 24px;
+  border: 2px solid $border-color;
+  border-top-color: $accent-primary;
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+.skeleton {
+  background: linear-gradient(
+    90deg,
+    $bg-tertiary 25%,
+    $bg-hover 50%,
+    $bg-tertiary 75%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+  border-radius: $radius-sm;
+}
+
+@keyframes shimmer {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+// ============================================
+// COMPONENTS - Ticker Tape
+// ============================================
+
+.ticker-tape {
+  display: flex;
+  gap: $spacing-lg;
+  padding: $spacing-sm $spacing-md;
+  background: $bg-secondary;
+  border-bottom: 1px solid $border-color;
+  overflow: hidden;
+  white-space: nowrap;
+  
+  .ticker-item {
+    display: flex;
+    align-items: center;
+    gap: $spacing-sm;
+    font-family: $font-mono;
+    font-size: 13px;
+    
+    .symbol {
+      color: $text-primary;
+      font-weight: 600;
+    }
+    
+    .price {
+      color: $text-secondary;
+    }
+    
+    .change {
+      font-weight: 500;
+    }
+  }
+}
+
+// ============================================
+// COMPONENTS - Price Display
+// ============================================
+
+.price-display {
+  font-family: $font-mono;
+  
+  .price {
+    font-size: 32px;
+    font-weight: 600;
+    line-height: 1;
+  }
+  
+  .change {
+    display: flex;
+    align-items: center;
+    gap: $spacing-sm;
+    margin-top: $spacing-xs;
+    font-size: 14px;
+    
+    .amount {
+      font-weight: 500;
+    }
+    
+    .percent {
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-weight: 600;
+    }
+  }
+}
+
+// ============================================
+// COMPONENTS - Stats Grid
+// ============================================
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  gap: $spacing-md;
+  
+  .stat-item {
+    .label {
+      font-size: 11px;
+      text-transform: uppercase;
+      color: $text-muted;
+      margin-bottom: 2px;
+    }
+    
+    .value {
+      font-family: $font-mono;
+      font-size: 16px;
+      font-weight: 500;
+      color: $text-primary;
+    }
+  }
+}
+
+// ============================================
+// LAYOUT - Grid System
+// ============================================
+
+.grid {
+  display: grid;
+  gap: $spacing-md;
+  
+  &-2 { grid-template-columns: repeat(2, 1fr); }
+  &-3 { grid-template-columns: repeat(3, 1fr); }
+  &-4 { grid-template-columns: repeat(4, 1fr); }
+}
+
+// ============================================
+// PAGE LAYOUT
+// ============================================
+
+.app-container {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  width: 100vw;
+  overflow: hidden;
+}
+
+.app-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 $spacing-md;
+  height: 48px;
+  background: $bg-secondary;
+  border-bottom: 2px solid $accent-primary;
+  flex-shrink: 0;
+}
+
+.app-main {
+  display: flex;
+  flex: 1;
+  overflow: hidden;
+}
+
+.app-sidebar {
+  width: 200px;
+  background: $bg-secondary;
+  border-right: 1px solid $border-color;
+  overflow-y: auto;
+  flex-shrink: 0;
+}
+
+.app-content {
+  flex: 1;
+  overflow-y: auto;
+  padding: $spacing-md;
+}
+
+// ============================================
+// ANIMATIONS
+// ============================================
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideUp {
+  from { 
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to { 
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.fade-in {
+  animation: fadeIn 0.3s ease;
+}
+
+.slide-up {
+  animation: slideUp 0.3s ease;
+}
+
+// ============================================
+// CHART CONTAINER
+// ============================================
+
+.chart-container {
+  width: 100%;
+  height: 400px;
+  background: $bg-card;
+  border: 1px solid $border-color;
+  border-radius: $radius-md;
+  overflow: hidden;
+}
+
+// ============================================
+// AI CHAT
+// ============================================
+
+.chat-container {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  
+  .chat-messages {
+    flex: 1;
+    overflow-y: auto;
+    padding: $spacing-md;
+    display: flex;
+    flex-direction: column;
+    gap: $spacing-md;
+  }
+  
+  .chat-message {
+    max-width: 85%;
+    padding: $spacing-md;
+    border-radius: $radius-md;
+    
+    &.user {
+      align-self: flex-end;
+      background: $accent-primary;
+      color: white;
+    }
+    
+    &.assistant {
+      align-self: flex-start;
+      background: $bg-tertiary;
+      border: 1px solid $border-color;
+    }
+  }
+  
+  .chat-input {
+    display: flex;
+    gap: $spacing-sm;
+    padding: $spacing-md;
+    border-top: 1px solid $border-color;
+    background: $bg-secondary;
+  }
+}
+
+// ============================================
+// NEWS FEED
+// ============================================
+
+.news-item {
+  display: flex;
+  gap: $spacing-md;
+  padding: $spacing-md;
+  border-bottom: 1px solid $border-color;
+  transition: background 0.15s ease;
+  cursor: pointer;
+  
+  &:hover {
+    background: $bg-hover;
+  }
+  
+  .news-content {
+    flex: 1;
+    
+    .news-title {
+      font-weight: 500;
+      margin-bottom: $spacing-xs;
+      line-height: 1.4;
+    }
+    
+    .news-meta {
+      display: flex;
+      align-items: center;
+      gap: $spacing-sm;
+      font-size: 12px;
+      color: $text-muted;
+    }
+  }
+  
+  .news-image {
+    width: 80px;
+    height: 60px;
+    border-radius: $radius-sm;
+    object-fit: cover;
+  }
+}
+
+// ============================================
+// RESPONSIVE
+// ============================================
+
+@media (max-width: 1200px) {
+  .grid-4 { grid-template-columns: repeat(2, 1fr); }
+  .grid-3 { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (max-width: 768px) {
+  .grid-4, .grid-3, .grid-2 { grid-template-columns: 1fr; }
+  .app-sidebar { display: none; }
+}
