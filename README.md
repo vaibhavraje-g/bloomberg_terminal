@@ -1,156 +1,103 @@
 # 📊 Bloomberg Terminal Alternative
 
-A comprehensive financial terminal application built with Angular 17 and Python FastAPI, featuring real-time market data, AI-powered analysis using Gemini, and a Bloomberg-style dark UI.
+A full-stack, enterprise-grade financial analytics and market intelligence terminal built with **Angular 17** and **Python FastAPI**. Features real-time market data streaming, technical indicators, and AI-powered market analysis via Gemini.
 
-![Bloomberg Terminal Alternative](https://img.shields.io/badge/version-1.0.0-orange) ![Angular](https://img.shields.io/badge/Angular-17-dd0031) ![FastAPI](https://img.shields.io/badge/FastAPI-0.109-009688) ![Gemini](https://img.shields.io/badge/Gemini-AI-4285F4)
+![Version](https://img.shields.io/badge/version-1.0.0-orange)
+![Angular](https://img.shields.io/badge/Angular-17-dd0031?logo=angular&logoColor=white)
+![FastAPI](https://img.shields.io/badge/FastAPI-0.109-009688?logo=fastapi&logoColor=white)
+![Python](https://img.shields.io/badge/Python-3.11-3776AB?logo=python&logoColor=white)
+![Gemini AI](https://img.shields.io/badge/Gemini-AI-4285F4?logo=google&logoColor=white)
 
-## ✨ Features
+---
 
-### 📈 Market Data
-- Real-time stock quotes via yfinance (no API key required)
-- Major market indices (S&P 500, NASDAQ, Dow Jones, etc.)
-- Historical OHLCV data with multiple timeframes
-- Sector performance heatmap
+## 🏛️ System Architecture
 
-### 📊 Technical Analysis
-- RSI, MACD, Bollinger Bands
-- Moving averages (SMA 20/50/200, EMA)
-- ATR (Average True Range)
-- Trading signals detection
-
-### 🤖 AI Analyst (Gemini)
-- Natural language stock analysis
-- Company comparisons
-- News summarization
-- Interactive chat interface
-
-### 📰 News Feed
-- Real-time financial news
-- Sentiment analysis
-- AI-generated summaries
-
-### 💼 Portfolio Management
-- Track holdings with P&L
-- Cost basis and gains calculation
-- Multiple watchlists
-
-### 🔍 Stock Screener
-- Custom filters (market cap, P/E, dividend, sector)
-- Pre-built screens (gainers, losers, value, dividend)
-- Most active stocks
-
-## 🚀 Quick Start
-
-### Prerequisites
-- Node.js 18+ 
-- Python 3.10+
-- Gemini API key (optional, for AI features)
-
-### Installation
-
-1. **Clone and install frontend dependencies:**
-```bash
-cd bloomberg_terminal
-npm install
+```
+┌─────────────────────────────────────────────────────────────┐
+│                 ANGULAR 17 PRESENTATION LAYER               │
+│  Bloomberg Dark Theme · Highcharts/TradingView · RxJS State │
+└──────────────────────────────┬──────────────────────────────┘
+                               │ REST / WebSocket
+                               ▼
+┌─────────────────────────────────────────────────────────────┐
+│                 FASTAPI ASYNCHRONOUS BACKEND                │
+│   Routers: Market · Analysis · News · Portfolio · Screener  │
+└──────────────┬───────────────────────────────┬──────────────┘
+               │                               │
+               ▼                               ▼
+┌─────────────────────────────┐ ┌─────────────────────────────┐
+│    MARKET DATA ENGINE       │ │       AI ANALYST ENGINE     │
+│ Yahoo Finance · SQLite DB   │ │ Gemini LLM · Sentiment RAG  │
+└─────────────────────────────┘ └─────────────────────────────┘
 ```
 
-2. **Install backend dependencies:**
-```bash
-cd backend
-pip install -r requirements.txt
-```
+---
 
-3. **Configure environment:**
-```bash
-# Edit backend/.env
-GEMINI_API_KEY=your_gemini_api_key_here
-```
+## 🚀 Key Features
 
-4. **Run the application:**
+- **📈 Real-Time Market Overview**: Live equity prices, intraday candle charts, and sector heatmaps.
+- **🧠 AI Equity Analyst**: Deep conversational insights, automated balance-sheet summarization, and valuation analysis powered by Google Gemini.
+- **📐 Technical Indicator Suite**: Real-time calculation of RSI, MACD, Bollinger Bands, and Moving Averages (SMA/EMA).
+- **📰 Sentiment News Screener**: Real-time aggregation of market headlines classified by sentiment (Bullish / Bearish / Neutral).
+- **💼 Portfolio & Watchlist Manager**: Real-time P&L tracking, risk metrics, and custom asset allocations.
 
-**Option A - Run separately:**
-```bash
-# Terminal 1: Backend
-cd backend
-python main.py
+---
 
-# Terminal 2: Frontend
-npm start
-```
-
-**Option B - Run together:**
-```bash
-npm run dev
-```
-
-5. **Open the app:**
-- Frontend: http://localhost:4200
-- API Docs: http://localhost:8000/docs
-
-## 🎨 UI Features
-
-- **Bloomberg-style dark theme** with orange accents
-- **Command bar** for quick symbol lookup
-- **Keyboard navigation** (Enter to search)
-- **Real-time market status** indicator
-- **Responsive grid layout**
-
-## 🔧 API Endpoints
-
-| Endpoint | Description |
-|----------|-------------|
-| `GET /api/market/quote/{symbol}` | Get stock quote |
-| `GET /api/market/history/{symbol}` | Historical data |
-| `GET /api/market/indices` | Market indices |
-| `GET /api/market/technical/{symbol}` | Technical indicators |
-| `GET /api/news/` | Financial news |
-| `POST /api/analysis/chat` | AI chat |
-| `GET /api/analysis/stock/{symbol}` | AI stock analysis |
-| `GET /api/portfolio/{id}` | Portfolio holdings |
-| `GET /api/watchlist/{id}` | Watchlist items |
-| `POST /api/screener/screen` | Custom stock screen |
-
-## 📁 Project Structure
+## 🛠️ Project Structure
 
 ```
 bloomberg_terminal/
-├── src/                          # Angular frontend
-│   ├── app/
-│   │   ├── pages/               # Page components
-│   │   │   ├── dashboard/       # Main dashboard
-│   │   │   ├── stock-detail/    # Stock details & analysis
-│   │   │   ├── news/            # News feed
-│   │   │   ├── portfolio/       # Portfolio management
-│   │   │   ├── screener/        # Stock screener
-│   │   │   └── ai-analyst/      # AI chat
-│   │   └── services/            # API service
-│   └── styles.scss              # Global Bloomberg theme
 ├── backend/
-│   ├── main.py                  # FastAPI app
-│   ├── routers/                 # API routes
-│   ├── services/                # Business logic
-│   │   ├── market_data.py       # yfinance integration
-│   │   ├── llm_service.py       # Gemini AI
-│   │   ├── news_service.py      # News aggregation
-│   │   └── technical.py         # TA indicators
-│   └── database/                # SQLite for persistence
-└── package.json
+│   ├── database/             # SQLite connection & schema models
+│   ├── routers/              # Modular API route controllers
+│   │   ├── analysis.py       # AI analysis endpoints
+│   │   ├── market.py         # Real-time quotes & historical data
+│   │   ├── news.py           # Headline aggregator
+│   │   ├── portfolio.py      # User portfolio state
+│   │   └── screener.py       # Stock filter & technical scanners
+│   ├── services/             # Core business logic & LLM integrations
+│   │   ├── llm_service.py    # Gemini AI analyst service
+│   │   ├── market_data.py    # Yahoo Finance & data fetcher
+│   │   └── technical.py      # Technical indicator calculators
+│   ├── config.py             # Typed application settings
+│   └── main.py               # FastAPI application entrypoint
+├── src/                      # Angular 17 frontend
+│   ├── app/
+│   │   ├── pages/            # Feature pages (Dashboard, Screener, Portfolio, etc.)
+│   │   └── services/         # Angular HTTP & WebSocket services
+│   └── styles.scss           # Bloomberg terminal dark theme
+└── AGENTS.md                 # Autonomous engineering directives
 ```
 
-## 🔮 Future Enhancements
+---
 
-- [ ] WebSocket for real-time price updates
-- [ ] TradingView charts integration
-- [ ] Options chain data
-- [ ] Economic calendar
-- [ ] Alert notifications
-- [ ] Export to Excel
-- [ ] Multi-currency support
+## ⚙️ Quickstart Guide
 
-## ⚠️ Disclaimer
+### 1. Backend Setup (FastAPI)
+```bash
+cd backend
+python -m venv venv
+source venv/bin/activate  # On Windows: .\venv\Scripts\activate
+pip install -r requirements.txt
+cp .env.example .env      # Add your GEMINI_API_KEY (optional)
+uvicorn main:app --reload --port 8000
+```
 
-This is an educational project. The data and analysis provided should not be used for actual trading decisions. Always consult a licensed financial advisor for investment advice.
+### 2. Frontend Setup (Angular)
+```bash
+npm install
+npm run start
+```
+Open `http://localhost:4200` to view the terminal.
 
-## 📄 License
+---
 
-MIT License
+## 📡 REST API Reference
+
+| Method | Endpoint | Description |
+| :--- | :--- | :--- |
+| `GET` | `/api/market/quote/{symbol}` | Fetch real-time price quote and daily range |
+| `GET` | `/api/market/history/{symbol}` | Historical OHLCV candle data |
+| `POST` | `/api/analysis/query` | Ask AI Analyst questions regarding ticker or sector |
+| `GET` | `/api/news/headlines` | Latest financial headlines with sentiment scores |
+| `GET` | `/api/screener/scan` | Filter equities by P/E, Market Cap, and RSI |
