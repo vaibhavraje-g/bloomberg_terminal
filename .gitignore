@@ -45,3 +45,17 @@ Thumbs.db
 backend/.env
 .env
 *.env
+
+# Python / Pytest / Virtual Environments
+__pycache__/
+*.py[cod]
+*.class
+*.so
+.pytest_cache/
+.coverage
+htmlcov/
+.venv/
+venv/
+ENV/
+*.db
+backend/terminal.db
